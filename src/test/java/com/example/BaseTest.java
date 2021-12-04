@@ -2,6 +2,8 @@ package com.example;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.junit.After;
 import org.junit.Before;
 
@@ -27,10 +29,8 @@ public class BaseTest {
         if (courierIds.size() != 0) {
             // удалить использованных курьеров по id
             for(int n:courierIds) {
-                //System.out.println(n);
                 Response response = given()
                         .header("Content-Type", "application/json")
-                        //.body(payload)
                         .when()
                         .delete("/api/v1/courier/"+n);
             }
@@ -44,9 +44,7 @@ public class BaseTest {
                 String password = courierLP.get(i);
                 i++;
 
-                String payload = "{\"login\":\"" + login + "\","
-                        + "\"password\":\"" + password + "\""
-                        + "}";
+                String payload = makeJSON("","login", login, "password", password);
                 Response response = given()
                         .header("Content-Type", "application/json")
                         .body(payload)
@@ -62,10 +60,26 @@ public class BaseTest {
 
                 given()
                         .header("Content-Type", "application/json")
-                        //.body(payload)
                         .when()
                         .delete("/api/v1/courier/"+id);
             }
         }
+    }
+
+    public static String makeJSON(String arr, String ...arg){
+
+        JSONObject jo = new JSONObject();
+        for(int i=0;i<arg.length;i++){
+            jo.put(arg[i],arg[i+1]);
+            i++;
+        }
+        JSONArray messages = new JSONArray();
+        String[] m = arr.split(",");
+        for (int i=0;i<m.length;i++){
+            messages.add(m[i]);
+        }
+        jo.put("color", messages);
+        System.out.println(jo.toJSONString());
+        return jo.toJSONString();
     }
 }

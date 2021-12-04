@@ -17,54 +17,14 @@ public class OrderCreateTest extends BaseTest{
     }
 
     @Parameterized.Parameters
-    public static Object[] getPayload(){
-        Object[][] obj = new Object[4][4];
-        obj[0] = new Object[] {"{\"firstName\": \"Naruto\",\n" +
-                "    \"lastName\": \"Uchiha\",\n" +
-                "    \"address\": \"Konoha, 142 apt.\",\n" +
-                "    \"metroStation\": 4,\n" +
-                "    \"phone\": \"+7 800 355 35 35\",\n" +
-                "    \"rentTime\": 5,\n" +
-                "    \"deliveryDate\": \"2020-06-06\",\n" +
-                "    \"comment\": \"Saske, come back to Konoha\",\n" +
-                "    \"color\": [\n" +
-                "        \"BLACK\",\"GRAY\" \n" +
-                "    ]}"};
-        obj[1] = new Object[] {"{\"firstName\": \"Naruto\",\n" +
-                "    \"lastName\": \"Uchiha\",\n" +
-                "    \"address\": \"Konoha, 142 apt.\",\n" +
-                "    \"metroStation\": 4,\n" +
-                "    \"phone\": \"+7 800 355 35 35\",\n" +
-                "    \"rentTime\": 5,\n" +
-                "    \"deliveryDate\": \"2020-06-06\",\n" +
-                "    \"comment\": \"Saske, come back to Konoha\",\n" +
-                "    \"color\": [\n" +
-                "        \"BLACK\"\n" +
-                "    ]}"};
-        obj[2] = new Object[] {"{\"firstName\": \"Naruto\",\n" +
-                "    \"lastName\": \"Uchiha\",\n" +
-                "    \"address\": \"Konoha, 142 apt.\",\n" +
-                "    \"metroStation\": 4,\n" +
-                "    \"phone\": \"+7 800 355 35 35\",\n" +
-                "    \"rentTime\": 5,\n" +
-                "    \"deliveryDate\": \"2020-06-06\",\n" +
-                "    \"comment\": \"Saske, come back to Konoha\",\n" +
-                "    \"color\": [\n" +
-                "        \"GRAY\"\n" +
-                "    ]}"};
-        obj[3] = new Object[] {"{\"firstName\": \"Naruto\",\n" +
-                "    \"lastName\": \"Uchiha\",\n" +
-                "    \"address\": \"Konoha, 142 apt.\",\n" +
-                "    \"metroStation\": 4,\n" +
-                "    \"phone\": \"+7 800 355 35 35\",\n" +
-                "    \"rentTime\": 5,\n" +
-                "    \"deliveryDate\": \"2020-06-06\",\n" +
-                "    \"comment\": \"Saske, come back to Konoha\",\n" +
-                "    \"color\": [" +
-                "    ]}"};
-
-        return obj;
-     }
+    public static Object[] getPayload2() {
+        return new Object[][]{
+                {makeJSON("BLACK,GRAY","firstName","Naruto","lastName","Uchiha","address","Konoha, 142 apt.","metroStation","4","phone","+7 800 355 35 35","rentTime","5","deliveryDate","2020-06-06","comment","Saske, come back to Konoha")},
+                {makeJSON("BLACK","firstName","Naruto","lastName","Uchiha","address","Konoha, 142 apt.","metroStation","4","phone","+7 800 355 35 35","rentTime","5","deliveryDate","2020-06-06","comment","Saske, come back to Konoha")},
+                {makeJSON("GRAY","firstName","Naruto","lastName","Uchiha","address","Konoha, 142 apt.","metroStation","4","phone","+7 800 355 35 35","rentTime","5","deliveryDate","2020-06-06","comment","Saske, come back to Konoha")},
+                {makeJSON("","firstName","Naruto","lastName","Uchiha","address","Konoha, 142 apt.","metroStation","4","phone","+7 800 355 35 35","rentTime","5","deliveryDate","2020-06-06","comment","Saske, come back to Konoha")},
+        };
+    }
 
     @Test
     public void createOrderByDifferentOptionsTest(){

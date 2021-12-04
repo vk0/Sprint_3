@@ -20,10 +20,7 @@ public class AuthCourierTest extends BaseTest{
     public void courierCanAuthTest(){
         ArrayList<String> userArr = new ScooterRegisterCourier().registerNewCourierAndReturnLoginPassword();
         Assert.assertNotNull(userArr);
-
-        String payload = "{\"login\":\"" + userArr.get(0) + "\","
-                + "\"password\":\"" + userArr.get(1) + "\""
-                + "}";
+        String payload = makeJSON("","login", userArr.get(0), "password", userArr.get(1));
 
         Response response = given()
                 .header("Content-Type", "application/json")
@@ -44,9 +41,7 @@ public class AuthCourierTest extends BaseTest{
     @Test
     public void errorAuthIfNotValidCred404NotFoundTest(){
 
-        String payload = "{\"login\":\"" + randLogin  + "\","
-                + "\"password\":\"" + randLogin + "\""
-                + "}";
+        String payload = makeJSON("","login", randLogin, "password", randLogin);
 
         Response response = given()
                 .header("Content-Type", "application/json")

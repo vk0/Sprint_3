@@ -20,9 +20,9 @@ public class NewCourierNotAllFieldTest extends BaseTest{
     @Parameterized.Parameters
     public static Object[] getPayload() {
         return new Object[][]{
-                {"{" + "\"password\":\"" + "rand_Pass_26_11_2021" + "\"" + "}"},
-                {"{ \"login\":\"" + "rand_Login_26_11_2021" + "\""  + "}"},
-                {"{}"}
+                {makeJSON("","password", "rand_Login_26_11_2021")},
+                {makeJSON("","login", "rand_Login_26_11_2021")},
+                {makeJSON("")},
         };
     }
 
@@ -33,7 +33,7 @@ public class NewCourierNotAllFieldTest extends BaseTest{
                 .and()
                 .body(payload)
                 .when()
-                .post("https://qa-scooter.praktikum-services.ru/api/v1/courier")
+                .post("/api/v1/courier")
                 .then().assertThat()
                 .statusCode(400);
     }
